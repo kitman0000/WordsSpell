@@ -1,0 +1,9 @@
+D:\code\单词记忆\单词记忆\bin\Debug\单词记忆.exe.config
+D:\code\单词记忆\单词记忆\bin\Debug\单词记忆.exe
+D:\code\单词记忆\单词记忆\bin\Debug\单词记忆.pdb
+D:\code\单词记忆\单词记忆\obj\Debug\单词记忆.csprojResolveAssemblyReference.cache
+D:\code\单词记忆\单词记忆\obj\Debug\单词记忆.Form1.resources
+D:\code\单词记忆\单词记忆\obj\Debug\单词记忆.Properties.Resources.resources
+D:\code\单词记忆\单词记忆\obj\Debug\单词记忆.csproj.GenerateResource.Cache
+D:\code\单词记忆\单词记忆\obj\Debug\单词记忆.exe
+D:\code\单词记忆\单词记忆\obj\Debug\单词记忆.pdb
