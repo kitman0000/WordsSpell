@@ -15,6 +15,7 @@ namespace 单词记忆
     public partial class Form1 : Form
     {
         int number = 0;//光标
+        List<string> UnRemDic = new List<string>();//未记忆的单词&&&&注释
         public Form1()
         {
             InitializeComponent();
@@ -48,20 +49,42 @@ namespace 单词记忆
             LeftWordsLabel.Text = "剩余单词:" + LeftWords;
             str_words = File.ReadAllText("unremember.txt", Encoding.Default);
             words = Regex.Split(str_words, "\r\n");
+            #region 随机单词
+            Random r = new Random();
+            number = r.Next(words.Length - 1);
+            #endregion
             WordLabel.Text = Regex.Split(words[number], " ")[0];
             DetailLabel.Text = words[number].Replace(WordLabel.Text, string.Empty);
             DetailLabel.Hide();
         }
-
+        int UnRemNumber = 0;
         private void button1_Click(object sender, EventArgs e)
         {
-            number++;
-            if (number >= 10) number = 0;
-            string str_words = File.ReadAllText("unremember.txt", Encoding.Default);
-            string[] words = Regex.Split(str_words, "\r\n");
-            WordLabel.Text = Regex.Split(words[number], " ")[0];
-            DetailLabel.Text = words[number].Replace(WordLabel.Text, string.Empty);
-            DetailLabel.Hide();
+           // number++;
+            //if (number >= 10) number = 0;
+            //若未记单词满10个，则只复习未记忆的单词(调用UnRemNumber)
+            if (UnRemDic.Count >= 11)
+            {
+                if (UnRemNumber >= UnRemDic.Count - 1) UnRemNumber = 0;
+                string[] WordArray = Regex.Split(UnRemDic[UnRemNumber ],"&&&&");
+                WordLabel.Text = WordArray[0];
+                DetailLabel.Text = WordArray[1];
+                UnRemNumber++;
+            }
+            else
+            {
+                //否则 随机获取下一个单词，并且将单词该未记忆单词放入UnRemDic
+                UnRemDic.Add(WordLabel.Text+"&&&&"+ DetailLabel.Text);
+                string str_words = File.ReadAllText("unremember.txt", Encoding.Default);
+                string[] words = Regex.Split(str_words, "\r\n");
+                #region 随机单词
+                Random r = new Random();
+                number = r.Next(words.Length - 1);
+                #endregion
+                WordLabel.Text = Regex.Split(words[number], " ")[0];
+                DetailLabel.Text = words[number].Replace(WordLabel.Text, string.Empty);
+                DetailLabel.Hide();
+            }
         }
 
         private void RefreshButton_Click(object sender, EventArgs e)
@@ -109,6 +132,11 @@ namespace 单词记忆
         private void tabPage1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             Console.WriteLine(e.KeyCode.ToString());
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://youdao.com/w/eng/"+WordLabel.Text);
         }
     }
 }
